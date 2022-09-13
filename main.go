@@ -29,6 +29,20 @@ func selectionSort(a []int) []int {
 	return a
 }
 
+func bubbleSort(a []int) []int {
+	if len(a) <= 1 {
+		return a
+	}
+	for i := 0; i < len(a); i++ {
+		for j := 1; j < len(a)-i; j++ {
+			if a[j] < a[j-1] {
+				a[j], a[j-1] = a[j-1], a[j]
+			}
+		}
+	}
+	return a
+}
+
 func runASort(name string, f func([]int) []int) {
 	fmt.Printf("%s\n", name)
 	a := genList()
@@ -38,4 +52,5 @@ func runASort(name string, f func([]int) []int) {
 
 func main() {
 	runASort("selection sort", selectionSort)
+	runASort("bubble sort", bubbleSort)
 }
