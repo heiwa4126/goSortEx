@@ -43,6 +43,39 @@ func bubbleSort(a []int) []int {
 	return a
 }
 
+func mergeSort(a []int) []int {
+	if len(a) <= 1 {
+		return a
+	}
+	var t int = len(a) / 2
+	l := mergeSort(a[:t])
+	r := mergeSort(a[t:])
+	b := make([]int, len(a))
+	bi := 0
+	li := 0
+	ri := 0
+	for {
+		if len(l)-li == 0 && len(r)-ri > 0 {
+			copy(b[bi:], r[ri:])
+			break
+		} else if len(l)-li > 0 && len(r)-ri == 0 {
+			copy(b[bi:], l[li:])
+			break
+		}
+		if l[li] < r[ri] {
+			b[bi] = l[li]
+			bi++
+			li++
+		} else {
+			b[bi] = r[ri]
+			bi++
+			ri++
+		}
+	}
+	copy(a, b)
+	return a
+}
+
 func runASort(name string, f func([]int) []int) {
 	fmt.Printf("%s\n", name)
 	a := genList()
@@ -53,4 +86,5 @@ func runASort(name string, f func([]int) []int) {
 func main() {
 	runASort("selection sort", selectionSort)
 	runASort("bubble sort", bubbleSort)
+	runASort("merge sort", mergeSort)
 }
