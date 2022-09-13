@@ -48,6 +48,7 @@ func mergeSort(a []int) []int {
 		return a
 	}
 	var t int = len(a) / 2
+	// fmt.Printf("%v|%v\n", a[:t], a[t:])
 	l := mergeSort(a[:t])
 	r := mergeSort(a[t:])
 	b := make([]int, len(a))
@@ -72,6 +73,7 @@ func mergeSort(a []int) []int {
 			ri++
 		}
 	}
+	// fmt.Printf("%v|%v->%v\n", l, r, b)
 	copy(a, b)
 	return a
 }
